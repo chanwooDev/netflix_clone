@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_project/model/model_movie.dart';
+import 'package:netflix_project/screen/detail_screen.dart';
 
 class BoxSlider extends StatelessWidget {
   final List<Movie> movies;
@@ -17,7 +18,7 @@ class BoxSlider extends StatelessWidget {
             height: 120,
             child: ListView(
               scrollDirection: Axis.horizontal,
-              children: makeBoxImages(movies),
+              children: makeBoxImages(context, movies),
             ),
           ),
         ],
@@ -26,19 +27,29 @@ class BoxSlider extends StatelessWidget {
   }
 }
 
-List<Widget> makeBoxImages(List<Movie> movies) {
+List<Widget> makeBoxImages(BuildContext context, List<Movie> movies) {
   List<Widget> result = [];
   for (var i = 0; i < movies.length; i++) {
-    result.add(InkWell(
-      onTap: () {},
-      child: Container(
-        padding: EdgeInsets.only(right: 10),
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Image.asset('images/' + movies[i].poster),
+    result.add(
+      InkWell(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute<dynamic>(
+                fullscreenDialog: true,
+                builder: (BuildContext context) {
+                  return DetailScreen(movie: movies[i]);
+                }),
+          );
+        },
+        child: Container(
+          padding: EdgeInsets.only(right: 10),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Image.asset('images/' + movies[i].poster),
+          ),
         ),
       ),
-    ));
+    );
   }
   return result;
 }
