@@ -4,6 +4,8 @@ import 'package:netflix_project/widget/box_slider.dart';
 import 'package:netflix_project/widget/carousel_slider.dart';
 import 'package:netflix_project/widget/circle_slider.dart';
 
+import 'detail_screen.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
